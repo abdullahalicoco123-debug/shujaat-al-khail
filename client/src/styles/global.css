@@ -1,0 +1,61 @@
+/* ==========================
+   GOOGLE FONTS
+========================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+
+/* ==========================
+   BODY
+========================== */
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  overflow-x: hidden;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.container {
+  width: min(1200px, 90%);
+  margin: 0 auto;
+}
+
+/* ==========================
+   SECTION
+========================== */
+
+section {
+  padding: var(--space-3xl) 0;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+button {
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+
+/* ==========================
+   INPUT
+========================== */
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+/* ==========================
+   TRANSITION
+========================== */
+
+a,
+button {
+  transition: var(--transition);
+}

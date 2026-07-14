@@ -1,0 +1,225 @@
+.featured {
+  width: 100%;
+  background-color: #faf7f0;
+  padding: 72px 0;
+}
+
+.featured-container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Reuses .section-header / .section-title / .section-divider from Categories.css */
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+/* Card */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(15, 51, 45, 0.14);
+}
+
+/* Image area */
+.product-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Badge */
+.product-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  padding: 5px 12px;
+  border-radius: 3px;
+}
+
+.product-badge-new {
+  background-color: #2f7d4f;
+}
+
+.product-badge-sale {
+  background-color: var(--color-gold);
+}
+
+/* Wishlist */
+.product-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 50%;
+  color: var(--color-dark-teal);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.product-wishlist:hover {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-white);
+}
+
+/* Info */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 20px;
+  gap: 6px;
+}
+
+.product-category {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-dark-teal);
+  line-height: 1.35;
+  min-height: 40px;
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+  margin-bottom: 12px;
+}
+
+.product-price-current {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-dark-teal);
+}
+
+.product-price-old {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: #9a9a9a;
+  text-decoration: line-through;
+}
+
+/* Add to cart */
+.product-cart-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background-color: var(--color-dark-teal);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.product-cart-btn:hover {
+  background-color: var(--color-gold);
+}
+
+.product-cart-icon {
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .featured-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .featured-container {
+    padding: 0 28px;
+  }
+
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .featured {
+    padding: 56px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .featured-container {
+    padding: 0 18px;
+  }
+
+  .featured-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .product-image-wrap {
+    height: 240px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+}

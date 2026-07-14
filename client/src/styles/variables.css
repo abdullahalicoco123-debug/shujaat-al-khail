@@ -1,0 +1,22 @@
+:root {
+  --color-dark-teal: #0f332d;
+  --color-dark-teal-2: #123a34;
+  --color-gold: #c9974d;
+  --color-gold-light: #e0b876;
+  --color-cream: #f1ede4;
+  --color-text-dark: #1c1c1c;
+  --color-white: #ffffff;
+  --color-border-light: #e5e0d5;
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Poppins", "Segoe UI", sans-serif;
+
+  --container-width: 1440px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 40px;
+
+  --transition-fast: 0.2s ease;
+}
