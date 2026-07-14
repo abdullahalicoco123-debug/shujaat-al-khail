@@ -1,9 +1,16 @@
+import { Link } from "react-router-dom";
 import { FiMapPin, FiPhone, FiMail, FiChevronRight } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import logo from "../../assets/logo/logo.png";
 import "./Footer.css";
 
-const quickLinks = ["Home", "Shop", "About Us", "Contact Us"];
+const quickLinks = [
+  { label: "Home", path: "/" },
+  { label: "Shop", path: "/shop" },
+  { label: "About Us", path: "/about" },
+  { label: "Contact Us", path: "/contact" },
+];
+
 const categories = [
   "Office Furniture",
   "Dining Table",
@@ -46,10 +53,10 @@ const Footer = () => {
             <ul className="footer-links">
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="footer-link">
+                  <Link to={link.path} className="footer-link">
                     <FiChevronRight className="footer-link-icon" />
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -99,9 +106,9 @@ const Footer = () => {
             © {currentYear} Shuja'at Al-Khail. All rights reserved.
           </p>
           <div className="footer-bottom-links">
-            <a href="#">Privacy Policy</a>
+            <Link to="/privacy">Privacy Policy</Link>
             <span className="footer-bottom-divider">|</span>
-            <a href="#">Terms &amp; Conditions</a>
+            <Link to="/terms">Terms &amp; Conditions</Link>
           </div>
         </div>
       </div>

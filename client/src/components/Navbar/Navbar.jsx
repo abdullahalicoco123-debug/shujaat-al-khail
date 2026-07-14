@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Navbar.css";
 import logo from "../../assets/logo/logo.png";
@@ -47,11 +48,11 @@ function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="navbar-menu">
-          <a className="active" href="#">
+          <Link className="active" to="/">
             HOME
-          </a>
+          </Link>
 
-          <a href="#">SHOP</a>
+          <Link to="/shop">SHOP</Link>
 
           <div
             className="navbar-dropdown"
@@ -78,9 +79,9 @@ function Navbar() {
             )}
           </div>
 
-          <a href="#">ABOUT US</a>
+          <Link to="/about">ABOUT US</Link>
 
-          <a href="#">CONTACT US</a>
+          <Link to="/contact">CONTACT US</Link> 
         </nav>
 
         {/* Right Side */}
@@ -153,21 +154,13 @@ function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
-          <a
-            href="#"
-            className="mobile-menu-link active"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/" className="mobile-menu-link active" onClick={closeMobileMenu}>
             HOME
-          </a>
+          </Link>
 
-          <a
-            href="#"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/shop" className="mobile-menu-link" onClick={closeMobileMenu}>
             SHOP
-          </a>
+          </Link>     
 
           <button
             className="mobile-menu-link mobile-cat-trigger"
@@ -197,21 +190,12 @@ function Navbar() {
             </div>
           )}
 
-          <a
-            href="#"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/about" className="mobile-menu-link" onClick={closeMobileMenu}>
             ABOUT US
-          </a>
-
-          <a
-            href="#"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          </Link>
+         <Link to="/contact" className="mobile-menu-link" onClick={closeMobileMenu}>
             CONTACT US
-          </a>
+          </Link>
 
           <button
             className="mobile-quote-btn"
