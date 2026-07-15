@@ -1,19 +1,19 @@
 import { FiArrowRight } from "react-icons/fi";
 import catOffice from "../../assets/images/categories/cat-office-furniture.jpg";
-import catDining from "../../assets/images/categories/cat-dining-table.jpg";
-import catChairs from "../../assets/images/categories/cat-chairs.jpg";
-import catHome from "../../assets/images/categories/cat-home-furniture.jpg";
-import catSchool from "../../assets/images/categories/cat-school-furniture.jpg";
 import catLockers from "../../assets/images/categories/cat-lockers.jpg";
+import catDining from "../../assets/images/categories/cat-dining-table.jpg";
+import catHome from "../../assets/images/categories/cat-home-furniture.jpg";
+import catGarden from "../../assets/images/categories/cat-garden-furniture.jpg";
+import catSchool from "../../assets/images/categories/cat-school-furniture.jpg";
 import "./Categories.css";
 
 const categories = [
   { name: "Office Furniture", image: catOffice, link: "#" },
-  { name: "Dining Table", image: catDining, link: "#" },
-  { name: "Chairs", image: catChairs, link: "#" },
-  { name: "Home Furniture", image: catHome, link: "#" },
-  { name: "School Furniture", image: catSchool, link: "#" },
   { name: "Lockers", image: catLockers, link: "#" },
+  { name: "Dining Table", image: catDining, link: "#" },
+  { name: "Home Furniture", image: catHome, link: "#" },
+  { name: "Garden Furniture", image: catGarden, link: "#" },
+  { name: "School Furniture", image: catSchool, link: "#" },
 ];
 
 const Categories = () => {

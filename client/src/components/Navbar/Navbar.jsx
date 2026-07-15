@@ -24,11 +24,11 @@ function Navbar() {
 
   const categories = [
     "Office Furniture",
-    "Dining Table",
-    "Chairs",
-    "Home Furniture",
-    "School Furniture",
     "Lockers",
+    "Dining Table",
+    "Home Furniture",
+    "Garden Furniture",
+    "School Furniture",
   ];
 
   const handleSearchSubmit = (e) => {
