@@ -2,7 +2,6 @@ import { FiShoppingCart, FiHeart } from "react-icons/fi";
 import deskImg from "../../assets/images/products/product-executive-desk.jpg";
 import safeImg from "../../assets/images/products/product-fire-safe.jpg";
 import chairImg from "../../assets/images/products/product-office-chair.jpg";
-import bedImg from "../../assets/images/products/product-bed.jpg";
 import schoolImg from "../../assets/images/products/product-school-desk.jpg";
 import "./FeaturedProducts.css";
 
@@ -31,14 +30,7 @@ const products = [
     badge: "NEW",
     image: chairImg,
   },
-  {
-    name: "Upholstered King Bed",
-    category: "Home Furniture",
-    price: 2799,
-    oldPrice: null,
-    badge: null,
-    image: bedImg,
-  },
+  
   {
     name: "Student Desk & Chair Set",
     category: "School Furniture",
