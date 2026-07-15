@@ -59,3 +59,12 @@ a,
 button {
   transition: var(--transition);
 }
+/* ===== Global RTL adjustments ===== */
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .container {
+  direction: rtl;
+}

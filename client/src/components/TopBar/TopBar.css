@@ -117,3 +117,33 @@
 .social-icons a {
   font-size: 14px;
 }
+.lang-switch {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+.lang-switch:hover {
+  background: #d4af37;
+  border-color: #d4af37;
+  color: #fff;
+}
+/* Keep phone & email readable (LTR) even in Arabic */
+[dir="rtl"] .topbar-right a {
+  direction: ltr;
+}
+
+/* Fix the RTL layout order of topbar items */
+[dir="rtl"] .topbar-right {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .topbar-container {
+  direction: rtl;
+}

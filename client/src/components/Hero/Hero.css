@@ -271,3 +271,30 @@
     justify-content: center;
   }
 }
+/* ===== RTL (Arabic) adjustments ===== */
+
+[dir="rtl"] .hero-content {
+  text-align: right;
+}
+
+[dir="rtl"] .hero-label {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .hero-description {
+  direction: rtl;
+}
+
+[dir="rtl"] .hero-actions {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .hero-indicators {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .hero-btn {
+  flex-direction: row-reverse;
+}

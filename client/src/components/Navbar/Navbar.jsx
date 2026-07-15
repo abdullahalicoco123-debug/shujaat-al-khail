@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./Navbar.css";
 import logo from "../../assets/logo/logo.png";
 
@@ -13,6 +14,8 @@ import {
 } from "react-icons/fa";
 
 function Navbar() {
+  const { t } = useTranslation();
+
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,42 +49,44 @@ function Navbar() {
           <img src={logo} alt="Shuja'at Al-Khail" />
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Menu */}
         <nav className="navbar-menu">
           <Link className="active" to="/">
-            HOME
+            {t("home")}
           </Link>
 
-          <Link to="/shop">SHOP</Link>
+          <Link to="/shop">{t("shop")}</Link>
 
           <div
             className="navbar-dropdown"
             onMouseEnter={() => setIsCategoriesOpen(true)}
             onMouseLeave={() => setIsCategoriesOpen(false)}
           >
-            <a href="#" className="navbar-dropdown-trigger">
-              CATEGORIES
+            <button type="button" className="navbar-dropdown-trigger">
+              {t("categories")}
               <FaChevronDown className="dropdown-icon" />
-            </a>
+            </button>
 
             {isCategoriesOpen && (
               <div className="navbar-dropdown-menu">
                 {categories.map((category, index) => (
-                  <a
+                  <Link
                     key={index}
-                    href="#"
+                    to={`/category/${category
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
                     className="navbar-dropdown-item"
                   >
                     {category}
-                  </a>
+                  </Link>
                 ))}
               </div>
             )}
           </div>
 
-          <Link to="/about">ABOUT US</Link>
+          <Link to="/about">{t("about")}</Link>
 
-          <Link to="/contact">CONTACT US</Link> 
+          <Link to="/contact">{t("contact")}</Link>
         </nav>
 
         {/* Right Side */}
@@ -104,11 +109,8 @@ function Navbar() {
             <span>0</span>
           </button>
 
-          <button className="quote-btn">
-            GET A QUOTE
-          </button>
+          <button className="quote-btn">{t("getQuote")}</button>
 
-          {/* Hamburger (Mobile Only) */}
           <button
             className="hamburger-btn"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -132,7 +134,7 @@ function Navbar() {
               <input
                 type="text"
                 className="navbar-search-input"
-                placeholder="Search for furniture..."
+                placeholder={t("searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
@@ -154,20 +156,28 @@ function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
-          <Link to="/" className="mobile-menu-link active" onClick={closeMobileMenu}>
-            HOME
+          <Link
+            to="/"
+            className="mobile-menu-link active"
+            onClick={closeMobileMenu}
+          >
+            {t("home")}
           </Link>
 
-          <Link to="/shop" className="mobile-menu-link" onClick={closeMobileMenu}>
-            SHOP
-          </Link>     
+          <Link
+            to="/shop"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
+            {t("shop")}
+          </Link>
 
           <button
+            type="button"
             className="mobile-menu-link mobile-cat-trigger"
             onClick={() => setIsMobileCatOpen((prev) => !prev)}
           >
-            CATEGORIES
-
+            {t("categories")}
             <FaChevronDown
               className={`mobile-cat-icon ${
                 isMobileCatOpen ? "rotated" : ""
@@ -178,30 +188,41 @@ function Navbar() {
           {isMobileCatOpen && (
             <div className="mobile-cat-list">
               {categories.map((category, index) => (
-                <a
+                <Link
                   key={index}
-                  href="#"
+                  to={`/category/${category
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
                   className="mobile-cat-item"
                   onClick={closeMobileMenu}
                 >
                   {category}
-                </a>
+                </Link>
               ))}
             </div>
           )}
 
-          <Link to="/about" className="mobile-menu-link" onClick={closeMobileMenu}>
-            ABOUT US
+          <Link
+            to="/about"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
+            {t("about")}
           </Link>
-         <Link to="/contact" className="mobile-menu-link" onClick={closeMobileMenu}>
-            CONTACT US
+
+          <Link
+            to="/contact"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
+            {t("contact")}
           </Link>
 
           <button
             className="mobile-quote-btn"
             onClick={closeMobileMenu}
           >
-            GET A QUOTE
+            {t("getQuote")}
           </button>
         </nav>
       )}

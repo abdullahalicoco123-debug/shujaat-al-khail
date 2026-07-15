@@ -1,4 +1,5 @@
 import "./TopBar.css";
+import { useTranslation } from "react-i18next";
 import {
   FaPhoneAlt,
   FaEnvelope,
@@ -8,14 +9,21 @@ import {
 } from "react-icons/fa";
 
 function TopBar() {
+  const { t, i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ar" : "en";
+    i18n.changeLanguage(newLang);
+    document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = newLang;
+  };
+
   return (
     <div className="topbar">
       <div className="container topbar-container">
 
         <div className="topbar-left">
-          <p>
-            Welcome to <span>Shuja'at Al-Khail</span> – Premium Office Furniture Solutions
-          </p>
+          <p>{t("welcome")}</p>
         </div>
 
         <div className="topbar-right">
@@ -41,6 +49,10 @@ function TopBar() {
               <FaLinkedinIn />
             </a>
           </div>
+
+          <button className="lang-switch" onClick={toggleLanguage}>
+            {i18n.language === "en" ? "العربية" : "English"}
+          </button>
 
         </div>
 
