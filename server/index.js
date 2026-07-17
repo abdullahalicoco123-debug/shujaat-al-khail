@@ -16,6 +16,8 @@ const categoryRoutes = require("./routes/categoryRoutes");
 app.use("/api/categories", categoryRoutes);
 const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 

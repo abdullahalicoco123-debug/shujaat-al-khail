@@ -1,50 +1,21 @@
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FiShoppingCart, FiHeart } from "react-icons/fi";
-import deskImg from "../../assets/images/products/product-executive-desk.jpg";
-import safeImg from "../../assets/images/products/product-fire-safe.jpg";
-import chairImg from "../../assets/images/products/product-office-chair.jpg";
-import schoolImg from "../../assets/images/products/product-school-desk.jpg";
 import "./FeaturedProducts.css";
 
-const products = [
-  {
-    name: "Executive Office Desk",
-    category: "Office Furniture",
-    price: 3499,
-    oldPrice: null,
-    badge: "NEW",
-    image: deskImg,
-  },
-  {
-    name: "Fire-Resistant Safe",
-    category: "Lockers",
-    price: 1099,
-    oldPrice: 1299,
-    badge: "SALE",
-    image: safeImg,
-  },
-  {
-    name: "Ergonomic Mesh Chair",
-    category: "Chairs",
-    price: 899,
-    oldPrice: null,
-    badge: "NEW",
-    image: chairImg,
-  },
-  
-  {
-    name: "Student Desk & Chair Set",
-    category: "School Furniture",
-    price: 649,
-    oldPrice: null,
-    badge: "NEW",
-    image: schoolImg,
-  },
-];
-
-const formatPrice = (value) =>
-  `SAR ${value.toLocaleString("en-US")}`;
-
 const FeaturedProducts = () => {
+  const { i18n } = useTranslation();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((error) => console.log("Error fetching products:", error));
+  }, []);
+
+  const formatPrice = (value) => `SAR ${value.toLocaleString("en-US")}`;
+
   return (
     <section className="featured">
       <div className="container featured-container">
@@ -54,8 +25,8 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="featured-grid">
-          {products.map((product, index) => (
-            <div className="product-card" key={index}>
+          {products.map((product) => (
+            <div className="product-card" key={product._id}>
               <div className="product-image-wrap">
                 {product.badge && (
                   <span
@@ -74,15 +45,27 @@ const FeaturedProducts = () => {
                 </button>
 
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={
+                    product.images && product.images.length > 0
+                      ? product.images[0]
+                      : "https://via.placeholder.com/400x400?text=Product"
+                  }
+                  alt={i18n.language === "ar" ? product.nameAr : product.nameEn}
                   className="product-image"
                 />
               </div>
 
               <div className="product-info">
-                <span className="product-category">{product.category}</span>
-                <h3 className="product-name">{product.name}</h3>
+                <span className="product-category">
+                  {product.category
+                    ? i18n.language === "ar"
+                      ? product.category.nameAr
+                      : product.category.nameEn
+                    : ""}
+                </span>
+                <h3 className="product-name">
+                  {i18n.language === "ar" ? product.nameAr : product.nameEn}
+                </h3>
 
                 <div className="product-price">
                   <span className="product-price-current">
