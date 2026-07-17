@@ -1,22 +1,19 @@
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FiArrowRight } from "react-icons/fi";
-import catOffice from "../../assets/images/categories/cat-office-furniture.jpg";
-import catLockers from "../../assets/images/categories/cat-lockers.jpg";
-import catDining from "../../assets/images/categories/cat-dining-table.jpg";
-import catHome from "../../assets/images/categories/cat-home-furniture.jpg";
-import catGarden from "../../assets/images/categories/cat-garden-furniture.jpg";
-import catSchool from "../../assets/images/categories/cat-school-furniture.jpg";
 import "./Categories.css";
 
-const categories = [
-  { name: "Office Furniture", image: catOffice, link: "#" },
-  { name: "Lockers", image: catLockers, link: "#" },
-  { name: "Dining Table", image: catDining, link: "#" },
-  { name: "Home Furniture", image: catHome, link: "#" },
-  { name: "Garden Furniture", image: catGarden, link: "#" },
-  { name: "School Furniture", image: catSchool, link: "#" },
-];
-
 const Categories = () => {
+  const { i18n } = useTranslation();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.log("Error fetching categories:", error));
+  }, []);
+
   return (
     <section className="categories">
       <div className="container categories-container">
@@ -26,17 +23,19 @@ const Categories = () => {
         </div>
 
         <div className="categories-grid">
-          {categories.map((category, index) => (
-            <a key={index} href={category.link} className="category-card">
+          {categories.map((category) => (
+            <a key={category._id} href="#" className="category-card">
               <div className="category-image-wrap">
                 <img
-                  src={category.image}
-                  alt={category.name}
+                  src={category.image || "https://via.placeholder.com/400x300?text=Category"}
+                  alt={i18n.language === "ar" ? category.nameAr : category.nameEn}
                   className="category-image"
                 />
               </div>
               <div className="category-info">
-                <h3 className="category-name">{category.name}</h3>
+                <h3 className="category-name">
+                  {i18n.language === "ar" ? category.nameAr : category.nameEn}
+                </h3>
                 <span className="category-link">
                   View Collection
                   <FiArrowRight className="category-link-icon" />
