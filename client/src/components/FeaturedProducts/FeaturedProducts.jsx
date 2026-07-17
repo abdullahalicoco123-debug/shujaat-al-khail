@@ -8,7 +8,7 @@ const FeaturedProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+   fetch("http://localhost:5000/api/products?featured=true")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.log("Error fetching products:", error));

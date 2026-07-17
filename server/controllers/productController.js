@@ -1,9 +1,25 @@
 const Product = require("../models/Product");
 
 // Get all products
+// Get all products (optionally only featured)
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate("category");
+    const filter = {};
+
+    if (req.query.featured === "true") {
+      filter.featured = true;
+    }
+
+    if (req.query.category) {
+      const Category = require("../models/Category");
+      const category = await Category.findOne({ slug: req.query.category });
+      if (!category) {
+        return res.json([]);
+      }
+      filter.category = category._id;
+    }
+
+    const products = await Product.find(filter).populate("category");
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -33,9 +49,37 @@ const createProduct = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+// Delete a product
+const deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json({ message: "Product deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+// Update a product
+const updateProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.json(product);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 module.exports = {
   getProducts,
   getProductById,
   createProduct,
+  updateProduct,
+  deleteProduct,
 };

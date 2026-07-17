@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FiMapPin, FiPhone, FiMail, FiChevronRight } from "react-icons/fi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import logo from "../../assets/logo/logo.png";
@@ -11,17 +13,17 @@ const quickLinks = [
   { label: "Contact Us", path: "/contact" },
 ];
 
-const categories = [
-  "Office Furniture",
-  "Lockers",
-  "Dining Table",
-  "Home Furniture",
-  "Garden Furniture",
-  "School Furniture",
-];
-
 const Footer = () => {
+  const { i18n } = useTranslation();
+  const [categories, setCategories] = useState([]);
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch(() => {});
+  }, []);
 
   return (
     <footer className="footer">
@@ -62,16 +64,19 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Categories */}
+          {/* Categories — now from the database */}
           <div className="footer-col">
             <h4 className="footer-title">Categories</h4>
             <ul className="footer-links">
-              {categories.map((category, index) => (
-                <li key={index}>
-                  <a href="#" className="footer-link">
+              {categories.map((category) => (
+                <li key={category._id}>
+                  <Link
+                    to={`/category/${category.slug}`}
+                    className="footer-link"
+                  >
                     <FiChevronRight className="footer-link-icon" />
-                    {category}
-                  </a>
+                    {i18n.language === "ar" ? category.nameAr : category.nameEn}
+                  </Link>
                 </li>
               ))}
             </ul>

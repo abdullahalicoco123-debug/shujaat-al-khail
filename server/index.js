@@ -18,6 +18,8 @@ const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
 const adminRoutes = require("./routes/adminRoutes");
 app.use("/api/admin", adminRoutes);
+const uploadRoutes = require("./routes/uploadRoutes");
+app.use("/api/upload", uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 

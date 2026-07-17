@@ -72,9 +72,7 @@ function Navbar() {
                 {categories.map((category, index) => (
                   <Link
                     key={index}
-                    to={`/category/${category
-                      .toLowerCase()
-                      .replace(/\s+/g, "-")}`}
+                    to={`/category/${category.toLowerCase().replaceAll(" ", "-")}`}
                     className="navbar-dropdown-item"
                   >
                     {category}
@@ -190,9 +188,7 @@ function Navbar() {
               {categories.map((category, index) => (
                 <Link
                   key={index}
-                  to={`/category/${category
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
+                  to={`/category/${category.toLowerCase().replaceAll(" ", "-")}`}
                   className="mobile-cat-item"
                   onClick={closeMobileMenu}
                 >
