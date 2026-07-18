@@ -108,7 +108,7 @@ const Contact = () => {
                   </span>
 
                   <span className="contact-info-value">
-                    Riyadh, Saudi Arabia
+                     Al Faisaliyyah, Riyadh, Saudi Arabia
                   </span>
                 </div>
               </div>

@@ -9,11 +9,17 @@ import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import CategoryPage from "./pages/CategoryPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import GalleryPage from "./pages/GalleryPage";
 
 function App() {
   return (
     <Routes>
       <Route path="category/:slug" element={<CategoryPage />} />
+      <Route path="cart" element={<CartPage />} />
+      <Route path="checkout" element={<CheckoutPage />} />
+      <Route path="gallery" element={<GalleryPage />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="about" element={<AboutPage />} />
