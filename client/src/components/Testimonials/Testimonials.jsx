@@ -5,22 +5,19 @@ import "./Testimonials.css";
 const testimonials = [
   {
     name: "Ahmed Al-Rashid",
-    role: "Office Manager, Riyadh",
     rating: 5,
     text: "The quality of the executive desks we ordered exceeded our expectations. Delivery was fast and the team was professional throughout.",
     initials: "AR",
   },
   {
     name: "Sarah Al-Mutairi",
-    role: "Interior Designer, Jeddah",
-    rating: 5,
+    rating: 4,
     text: "Beautiful furniture with excellent craftsmanship. My clients are always impressed with the pieces I source from Shuja'at Al-Khail.",
     initials: "SM",
   },
   {
     name: "Khalid Al-Otaibi",
-    role: "Business Owner, Dammam",
-    rating: 5,
+    rating: 4,
     text: "We furnished our entire office and couldn't be happier. Great prices, premium quality, and reliable service. Highly recommended.",
     initials: "KO",
   },
