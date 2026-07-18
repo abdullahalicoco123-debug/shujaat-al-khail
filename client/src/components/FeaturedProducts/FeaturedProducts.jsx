@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FiShoppingCart, FiHeart } from "react-icons/fi";
 import "./FeaturedProducts.css";
+import { useCart } from "../../context/CartContext";
 
 const FeaturedProducts = () => {
   const { i18n } = useTranslation();
   const [products, setProducts] = useState([]);
+  const { addToCart } = useCart();
 
   useEffect(() => {
    fetch("http://localhost:5000/api/products?featured=true")
@@ -14,7 +16,10 @@ const FeaturedProducts = () => {
       .catch((error) => console.log("Error fetching products:", error));
   }, []);
 
-  const formatPrice = (value) => `SAR ${value.toLocaleString("en-US")}`;
+  const formatPrice = (value) =>
+    i18n.language === "ar"
+      ? `${value.toLocaleString("ar-SA")} ر.س`
+      : `SAR ${value.toLocaleString("en-US")}`;
 
   return (
     <section className="featured">
@@ -67,21 +72,25 @@ const FeaturedProducts = () => {
                   {i18n.language === "ar" ? product.nameAr : product.nameEn}
                 </h3>
 
-                <div className="product-price">
-                  <span className="product-price-current">
-                    {formatPrice(product.price)}
-                  </span>
-                  {product.oldPrice && (
-                    <span className="product-price-old">
-                      {formatPrice(product.oldPrice)}
+                {typeof product.price === "number" && (
+                  <div className="product-price">
+                    <span className="product-price-current">
+                      {formatPrice(product.price)}
                     </span>
-                  )}
-                </div>
+                    {typeof product.oldPrice === "number" && (
+                      <span className="product-price-old">
+                        {formatPrice(product.oldPrice)}
+                      </span>
+                    )}
+                  </div>
+                )}
 
-                <button className="product-cart-btn">
-                  <FiShoppingCart className="product-cart-icon" />
-                  Add to Cart
-                </button>
+                {typeof product.price === "number" && (
+                  <button className="product-cart-btn" onClick={() => addToCart(product)}>
+                    <FiShoppingCart className="product-cart-icon" />
+                    Add to Cart
+                  </button>
+                )}
               </div>
             </div>
           ))}

@@ -20,7 +20,7 @@ const productSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: true,
+      default: null,
     },
     oldPrice: {
       type: Number,

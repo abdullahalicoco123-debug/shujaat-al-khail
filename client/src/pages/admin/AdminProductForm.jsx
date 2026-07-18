@@ -13,7 +13,7 @@ function AdminProductForm({ product, onClose, onSaved }) {
     nameAr: product ? product.nameAr : "",
     descriptionEn: product ? product.descriptionEn : "",
     descriptionAr: product ? product.descriptionAr : "",
-    price: product ? product.price : "",
+    price: product && product.price !== null && product.price !== undefined ? product.price : "",
     oldPrice: product && product.oldPrice ? product.oldPrice : "",
     category: product && product.category ? product.category._id : "",
     colors: product ? product.colors.join(", ") : "",
@@ -74,8 +74,8 @@ function AdminProductForm({ product, onClose, onSaved }) {
     e.preventDefault();
     setError("");
 
-    if (!form.nameEn || !form.nameAr || !form.price || !form.category) {
-      setError("Please fill name (EN + AR), price and category.");
+    if (!form.nameEn || !form.nameAr || !form.category) {
+      setError("Please fill name (EN + AR) and category.");
       return;
     }
 
@@ -87,7 +87,7 @@ function AdminProductForm({ product, onClose, onSaved }) {
       nameAr: form.nameAr,
       descriptionEn: form.descriptionEn,
       descriptionAr: form.descriptionAr,
-      price: Number(form.price),
+      price: form.price === "" ? null : Number(form.price),
       oldPrice: form.oldPrice ? Number(form.oldPrice) : null,
       category: form.category,
       images: images,
@@ -185,8 +185,8 @@ function AdminProductForm({ product, onClose, onSaved }) {
 
           <div className="admin-form-row">
             <div className="admin-form-field">
-              <label>Price (SAR) *</label>
-              <input type="number" name="price" value={form.price} onChange={handleChange} />
+              <label>Price (SAR, optional)</label>
+              <input type="number" name="price" value={form.price} onChange={handleChange} min="0" placeholder="Leave empty to hide the price" />
             </div>
             <div className="admin-form-field">
               <label>Old Price (SAR, for SALE items)</label>

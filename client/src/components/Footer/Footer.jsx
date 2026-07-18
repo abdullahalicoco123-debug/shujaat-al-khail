@@ -88,7 +88,7 @@ const Footer = () => {
             <ul className="footer-contact">
               <li className="footer-contact-item">
                 <FiMapPin className="footer-contact-icon" />
-                <span>Riyadh, Saudi Arabia</span>
+                 <span>Al Faisaliyyah, Riyadh, Saudi Arabia</span>
               </li>
               <li className="footer-contact-item">
                 <FiPhone className="footer-contact-icon" />

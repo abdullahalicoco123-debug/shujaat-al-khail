@@ -124,7 +124,7 @@ function AdminProducts() {
               </td>
               <td>{product.nameEn}</td>
               <td>{product.category ? product.category.nameEn : "—"}</td>
-              <td>SAR {product.price}</td>
+              <td>{typeof product.price === "number" ? `SAR ${product.price}` : "â€”"}</td>
               <td>{product.badge || "—"}</td>
               <td>
                 <button

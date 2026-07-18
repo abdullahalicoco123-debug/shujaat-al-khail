@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import AdminProducts from "./AdminProducts";
 import AdminCategories from "./AdminCategories";
 import "./AdminDashboard.css";
+import AdminOrders from "./AdminOrders";
+import AdminGallery from "./AdminGallery";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -34,8 +36,18 @@ function AdminDashboard() {
           >
             Categories
           </button>
-          <button className="admin-nav-item">Orders</button>
-          <button className="admin-nav-item">Gallery</button>
+          <button
+            className={`admin-nav-item ${activeTab === "orders" ? "active" : ""}`}
+            onClick={() => setActiveTab("orders")}
+          >
+            Orders
+          </button>
+         <button
+            className={`admin-nav-item ${activeTab === "gallery" ? "active" : ""}`}
+            onClick={() => setActiveTab("gallery")}
+          >
+            Gallery
+          </button>
         </nav>
 
         <button className="admin-logout" onClick={handleLogout}>
@@ -46,6 +58,8 @@ function AdminDashboard() {
       <main className="admin-content">
         {activeTab === "products" && <AdminProducts />}
         {activeTab === "categories" && <AdminCategories />}
+        {activeTab === "orders" && <AdminOrders />}
+        {activeTab === "gallery" && <AdminGallery />}
       </main>
     </div>
   );

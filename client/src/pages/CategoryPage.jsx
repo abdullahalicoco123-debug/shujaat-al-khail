@@ -34,7 +34,10 @@ function CategoryPage() {
       .catch(() => {});
   }, [slug]);
 
-  const formatPrice = (value) => `SAR ${value.toLocaleString("en-US")}`;
+  const formatPrice = (value) =>
+    i18n.language === "ar"
+      ? `${value.toLocaleString("ar-SA")} ر.س`
+      : `SAR ${value.toLocaleString("en-US")}`;
 
   const categoryName = category
     ? i18n.language === "ar"
@@ -94,21 +97,25 @@ function CategoryPage() {
                     {i18n.language === "ar" ? product.nameAr : product.nameEn}
                   </h3>
 
-                  <div className="product-price">
-                    <span className="product-price-current">
-                      {formatPrice(product.price)}
-                    </span>
-                    {product.oldPrice && (
-                      <span className="product-price-old">
-                        {formatPrice(product.oldPrice)}
+                  {typeof product.price === "number" && (
+                    <div className="product-price">
+                      <span className="product-price-current">
+                        {formatPrice(product.price)}
                       </span>
-                    )}
-                  </div>
+                      {typeof product.oldPrice === "number" && (
+                        <span className="product-price-old">
+                          {formatPrice(product.oldPrice)}
+                        </span>
+                      )}
+                    </div>
+                  )}
 
-                  <button className="product-cart-btn">
-                    <FiShoppingCart className="product-cart-icon" />
-                    Add to Cart
-                  </button>
+                  {typeof product.price === "number" && (
+                    <button className="product-cart-btn">
+                      <FiShoppingCart className="product-cart-icon" />
+                      Add to Cart
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

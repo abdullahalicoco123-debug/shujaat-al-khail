@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useCart } from "../../context/CartContext";
 import "./Navbar.css";
 import logo from "../../assets/logo/logo.png";
 
@@ -15,7 +16,8 @@ import {
 
 function Navbar() {
   const { t } = useTranslation();
-
+  const { cartCount } = useCart();
+  const navigate = useNavigate();
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -44,12 +46,11 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="container navbar-container">
-        {/* Logo */}
         <div className="navbar-logo">
           <img src={logo} alt="Shuja'at Al-Khail" />
         </div>
 
-        {/* Desktop Menu */}
+        {/* Desktop Navigation */}
         <nav className="navbar-menu">
           <Link className="active" to="/">
             {t("home")}
@@ -62,10 +63,10 @@ function Navbar() {
             onMouseEnter={() => setIsCategoriesOpen(true)}
             onMouseLeave={() => setIsCategoriesOpen(false)}
           >
-            <button type="button" className="navbar-dropdown-trigger">
+            <a href="#" className="navbar-dropdown-trigger">
               {t("categories")}
               <FaChevronDown className="dropdown-icon" />
-            </button>
+            </a>
 
             {isCategoriesOpen && (
               <div className="navbar-dropdown-menu">
@@ -82,12 +83,14 @@ function Navbar() {
             )}
           </div>
 
+          <Link to="/gallery">{t("gallery")}</Link>
+
           <Link to="/about">{t("about")}</Link>
 
           <Link to="/contact">{t("contact")}</Link>
         </nav>
 
-        {/* Right Side */}
+        {/* Right */}
         <div className="navbar-right">
           <button
             className="icon-btn"
@@ -102,9 +105,9 @@ function Navbar() {
             <span>0</span>
           </button>
 
-          <button className="icon-btn badge">
+          <button className="icon-btn badge" onClick={() => navigate("/cart")}>
             <FaShoppingCart />
-            <span>0</span>
+            <span>{cartCount}</span>
           </button>
 
           <button className="quote-btn">{t("getQuote")}</button>
@@ -119,16 +122,12 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Search Bar */}
+      {/* Search bar */}
       {isSearchOpen && (
         <div className="navbar-search">
           <div className="container navbar-search-container">
-            <form
-              className="navbar-search-form"
-              onSubmit={handleSearchSubmit}
-            >
+            <form className="navbar-search-form" onSubmit={handleSearchSubmit}>
               <FaSearch className="navbar-search-icon" />
-
               <input
                 type="text"
                 className="navbar-search-input"
@@ -137,7 +136,6 @@ function Navbar() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
               />
-
               <button
                 type="button"
                 className="navbar-search-close"
@@ -154,32 +152,21 @@ function Navbar() {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
-          <Link
-            to="/"
-            className="mobile-menu-link active"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/" className="mobile-menu-link active" onClick={closeMobileMenu}>
             {t("home")}
           </Link>
 
-          <Link
-            to="/shop"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/shop" className="mobile-menu-link" onClick={closeMobileMenu}>
             {t("shop")}
           </Link>
 
           <button
-            type="button"
             className="mobile-menu-link mobile-cat-trigger"
             onClick={() => setIsMobileCatOpen((prev) => !prev)}
           >
             {t("categories")}
             <FaChevronDown
-              className={`mobile-cat-icon ${
-                isMobileCatOpen ? "rotated" : ""
-              }`}
+              className={`mobile-cat-icon ${isMobileCatOpen ? "rotated" : ""}`}
             />
           </button>
 
@@ -198,26 +185,19 @@ function Navbar() {
             </div>
           )}
 
-          <Link
-            to="/about"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/gallery" className="mobile-menu-link" onClick={closeMobileMenu}>
+            {t("gallery")}
+          </Link>
+
+          <Link to="/about" className="mobile-menu-link" onClick={closeMobileMenu}>
             {t("about")}
           </Link>
 
-          <Link
-            to="/contact"
-            className="mobile-menu-link"
-            onClick={closeMobileMenu}
-          >
+          <Link to="/contact" className="mobile-menu-link" onClick={closeMobileMenu}>
             {t("contact")}
           </Link>
 
-          <button
-            className="mobile-quote-btn"
-            onClick={closeMobileMenu}
-          >
+          <button className="mobile-quote-btn" onClick={closeMobileMenu}>
             {t("getQuote")}
           </button>
         </nav>
