@@ -392,3 +392,30 @@
     font-size: 18px;
   }
 }
+.navbar-dropdown-trigger {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.navbar-dropdown-trigger:hover {
+  color: var(--color-gold);
+}
+
+.dropdown-icon {
+  transition: transform 0.25s ease;
+}
+
+.dropdown-icon.rotated {
+  transform: rotate(180deg);
+}

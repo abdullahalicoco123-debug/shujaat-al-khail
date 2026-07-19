@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCart } from "../../context/CartContext";
@@ -15,7 +15,7 @@ import {
 } from "react-icons/fa";
 
 function Navbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { cartCount } = useCart();
   const navigate = useNavigate();
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -23,19 +23,35 @@ function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileCatOpen, setIsMobileCatOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const dropdownRef = useRef(null);
 
-  const categories = [
-    "Office Furniture",
-    "Lockers",
-    "Dining Table",
-    "Home Furniture",
-    "Garden Furniture",
-    "School Furniture",
-  ];
+  const isArabic = i18n.language === "ar";
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(Array.isArray(data) ? data : []))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsCategoriesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    console.log("Searching for:", searchQuery);
+    const term = searchQuery.trim();
+    if (!term) return;
+    navigate(`/search?q=${encodeURIComponent(term)}`);
+    setIsSearchOpen(false);
+    setSearchQuery("");
   };
 
   const closeMobileMenu = () => {
@@ -47,10 +63,11 @@ function Navbar() {
     <header className="navbar">
       <div className="container navbar-container">
         <div className="navbar-logo">
-          <img src={logo} alt="Shuja'at Al-Khail" />
+          <Link to="/">
+            <img src={logo} alt="Shuja'at Al-Khail" />
+          </Link>
         </div>
 
-        {/* Desktop Navigation */}
         <nav className="navbar-menu">
           <Link className="active" to="/">
             {t("home")}
@@ -58,25 +75,29 @@ function Navbar() {
 
           <Link to="/shop">{t("shop")}</Link>
 
-          <div
-            className="navbar-dropdown"
-            onMouseEnter={() => setIsCategoriesOpen(true)}
-            onMouseLeave={() => setIsCategoriesOpen(false)}
-          >
-            <a href="#" className="navbar-dropdown-trigger">
+          <div className="navbar-dropdown" ref={dropdownRef}>
+            <button
+              type="button"
+              className="navbar-dropdown-trigger"
+              onClick={() => setIsCategoriesOpen((prev) => !prev)}
+              aria-expanded={isCategoriesOpen}
+            >
               {t("categories")}
-              <FaChevronDown className="dropdown-icon" />
-            </a>
+              <FaChevronDown
+                className={`dropdown-icon ${isCategoriesOpen ? "rotated" : ""}`}
+              />
+            </button>
 
             {isCategoriesOpen && (
               <div className="navbar-dropdown-menu">
-                {categories.map((category, index) => (
+                {categories.map((cat) => (
                   <Link
-                    key={index}
-                    to={`/category/${category.toLowerCase().replaceAll(" ", "-")}`}
+                    key={cat._id}
+                    to={`/category/${cat.slug}`}
                     className="navbar-dropdown-item"
+                    onClick={() => setIsCategoriesOpen(false)}
                   >
-                    {category}
+                    {isArabic ? cat.nameAr : cat.nameEn}
                   </Link>
                 ))}
               </div>
@@ -90,7 +111,6 @@ function Navbar() {
           <Link to="/contact">{t("contact")}</Link>
         </nav>
 
-        {/* Right */}
         <div className="navbar-right">
           <button
             className="icon-btn"
@@ -122,7 +142,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Search bar */}
       {isSearchOpen && (
         <div className="navbar-search">
           <div className="container navbar-search-container">
@@ -149,7 +168,6 @@ function Navbar() {
         </div>
       )}
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
           <Link to="/" className="mobile-menu-link active" onClick={closeMobileMenu}>
@@ -172,14 +190,14 @@ function Navbar() {
 
           {isMobileCatOpen && (
             <div className="mobile-cat-list">
-              {categories.map((category, index) => (
+              {categories.map((cat) => (
                 <Link
-                  key={index}
-                  to={`/category/${category.toLowerCase().replaceAll(" ", "-")}`}
+                  key={cat._id}
+                  to={`/category/${cat.slug}`}
                   className="mobile-cat-item"
                   onClick={closeMobileMenu}
                 >
-                  {category}
+                  {isArabic ? cat.nameAr : cat.nameEn}
                 </Link>
               ))}
             </div>

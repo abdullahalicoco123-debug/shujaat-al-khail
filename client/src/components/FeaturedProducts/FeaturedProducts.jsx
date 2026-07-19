@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartContext";
 import "./FeaturedProducts.css";
 
 const FeaturedProducts = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
 
@@ -23,7 +23,7 @@ const FeaturedProducts = () => {
     <section className="featured">
       <div className="container featured-container">
         <div className="section-header">
-          <h2 className="section-title">Featured Products</h2>
+          <h2 className="section-title">{t("featuredProducts")}</h2>
           <span className="section-divider"></span>
         </div>
 

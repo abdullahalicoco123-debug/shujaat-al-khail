@@ -7,21 +7,23 @@ import logo from "../../assets/logo/logo.png";
 import "./Footer.css";
 
 const quickLinks = [
-  { label: "Home", path: "/" },
-  { label: "Shop", path: "/shop" },
-  { label: "About Us", path: "/about" },
-  { label: "Contact Us", path: "/contact" },
+  { key: "home", path: "/" },
+  { key: "shop", path: "/shop" },
+  { key: "gallery", path: "/gallery" },
+  { key: "about", path: "/about" },
+  { key: "contact", path: "/contact" },
 ];
 
 const Footer = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([]);
   const currentYear = new Date().getFullYear();
+  const isArabic = i18n.language === "ar";
 
   useEffect(() => {
     fetch("http://localhost:5000/api/categories")
       .then((res) => res.json())
-      .then((data) => setCategories(data))
+      .then((data) => setCategories(Array.isArray(data) ? data : []))
       .catch(() => {});
   }, []);
 
@@ -29,13 +31,9 @@ const Footer = () => {
     <footer className="footer">
       <div className="container footer-container">
         <div className="footer-grid">
-          {/* Company */}
           <div className="footer-col footer-about">
             <img src={logo} alt="Shuja'at Al-Khail" className="footer-logo" />
-            <p className="footer-desc">
-              Premium office and home furniture solutions in Saudi Arabia.
-              Crafting comfort, style and durability for every space.
-            </p>
+            <p className="footer-desc">{t("footerDesc")}</p>
             <div className="footer-socials">
               <a href="#" aria-label="Facebook" className="footer-social">
                 <FaFacebookF />
@@ -49,46 +47,40 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div className="footer-col">
-            <h4 className="footer-title">Quick Links</h4>
+            <h4 className="footer-title">{t("quickLinks")}</h4>
             <ul className="footer-links">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
+              {quickLinks.map((link) => (
+                <li key={link.key}>
                   <Link to={link.path} className="footer-link">
                     <FiChevronRight className="footer-link-icon" />
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Categories — now from the database */}
           <div className="footer-col">
-            <h4 className="footer-title">Categories</h4>
+            <h4 className="footer-title">{t("categories")}</h4>
             <ul className="footer-links">
               {categories.map((category) => (
                 <li key={category._id}>
-                  <Link
-                    to={`/category/${category.slug}`}
-                    className="footer-link"
-                  >
+                  <Link to={`/category/${category.slug}`} className="footer-link">
                     <FiChevronRight className="footer-link-icon" />
-                    {i18n.language === "ar" ? category.nameAr : category.nameEn}
+                    {isArabic ? category.nameAr : category.nameEn}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div className="footer-col">
-            <h4 className="footer-title">Contact Us</h4>
+            <h4 className="footer-title">{t("contact")}</h4>
             <ul className="footer-contact">
               <li className="footer-contact-item">
                 <FiMapPin className="footer-contact-icon" />
-                 <span>Al Faisaliyyah, Riyadh, Saudi Arabia</span>
+                <span>{t("address")}</span>
               </li>
               <li className="footer-contact-item">
                 <FiPhone className="footer-contact-icon" />
@@ -108,12 +100,12 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="container footer-bottom-container">
           <p className="footer-copyright">
-            © {currentYear} Shuja'at Al-Khail. All rights reserved.
+            © {currentYear} Shuja'at Al-Khail. {t("rightsReserved")}
           </p>
           <div className="footer-bottom-links">
-            <Link to="/privacy">Privacy Policy</Link>
+            <Link to="/privacy">{t("privacyPolicy")}</Link>
             <span className="footer-bottom-divider">|</span>
-            <Link to="/terms">Terms &amp; Conditions</Link>
+            <Link to="/terms">{t("termsConditions")}</Link>
           </div>
         </div>
       </div>

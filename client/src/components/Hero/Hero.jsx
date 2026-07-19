@@ -1,41 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FiArrowRight } from "react-icons/fi";
 import heroOffice from "../../assets/images/hero-image.jpg";
 import heroHome from "../../assets/images/hero-home.jpg";
 import heroSchool from "../../assets/images/hero-school.jpg";
 import "./Hero.css";
 
-const slides = [
-  {
-    image: heroOffice,
-    label: "Office Furniture",
-    titleLine1: "Where Productivity",
-    titleMuted: "Meets ",
-    titleGold: "Comfort",
-    description:
-      "Modern, stylish and ergonomic office furniture designed for focus and success.",
-  },
-  {
-    image: heroHome,
-    label: "Home Collection",
-    titleLine1: "Comfort That",
-    titleMuted: "Feels Like ",
-    titleGold: "Home",
-    description:
-      "Elegant home furniture that brings warmth, style and function to every room.",
-  },
-  {
-    image: heroSchool,
-    label: "School Furniture",
-    titleLine1: "Built for",
-    titleMuted: "Learning ",
-    titleGold: "Spaces",
-    description:
-      "Durable, comfortable school furniture designed for classrooms that inspire.",
-  },
-];
+const slideImages = [heroOffice, heroHome, heroSchool];
 
 const Hero = () => {
+  const { t } = useTranslation();
   const [activeSlide, setActiveSlide] = useState(0);
 
   const goToSlide = useCallback((index) => {
@@ -44,23 +19,23 @@ const Hero = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
+      setActiveSlide((prev) => (prev + 1) % slideImages.length);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [activeSlide]);
 
-  const current = slides[activeSlide];
+  const n = activeSlide + 1;
 
   return (
     <section className="hero">
-      {slides.map((slide, index) => (
+      {slideImages.map((image, index) => (
         <div
           key={index}
           className={`hero-image-layer ${
             index === activeSlide ? "hero-image-active" : ""
           }`}
-          style={{ backgroundImage: `url(${slide.image})` }}
+          style={{ backgroundImage: `url(${image})` }}
           aria-hidden="true"
         ></div>
       ))}
@@ -69,30 +44,28 @@ const Hero = () => {
         <div className="hero-content" key={activeSlide}>
           <div className="hero-label">
             <span className="hero-label-line"></span>
-            <span className="hero-label-text">{current.label}</span>
+            <span className="hero-label-text">{t(`heroSlide${n}Label`)}</span>
           </div>
 
           <h1 className="hero-title">
-            {current.titleLine1}
-            <br />
-            <span className="hero-title-muted">{current.titleMuted}</span>
-            <span className="hero-title-gold">{current.titleGold}</span>
+            {t(`heroSlide${n}Title`)}{" "}
+            <span className="hero-title-gold">{t(`heroSlide${n}Gold`)}</span>
           </h1>
 
-          <p className="hero-description">{current.description}</p>
+          <p className="hero-description">{t(`heroSlide${n}Desc`)}</p>
 
           <div className="hero-actions">
-            <a href="#" className="hero-btn hero-btn-primary">
-              Shop Now
+            <Link to="/shop" className="hero-btn hero-btn-primary">
+              {t("shopNow")}
               <FiArrowRight className="hero-btn-icon" />
-            </a>
-            <a href="#" className="hero-btn hero-btn-outline">
-              Explore Categories
+            </Link>
+            <a href="#categories" className="hero-btn hero-btn-outline">
+              {t("exploreCategories")}
             </a>
           </div>
 
           <div className="hero-indicators">
-            {slides.map((_, index) => (
+            {slideImages.map((_, index) => (
               <button
                 key={index}
                 type="button"

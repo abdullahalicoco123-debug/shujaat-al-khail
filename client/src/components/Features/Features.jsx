@@ -1,25 +1,28 @@
-import { FiAward, FiTruck, FiHeadphones } from 'react-icons/fi';
-import './Features.css';
-
-const features = [
-  {
-    icon: <FiAward />,
-    title: 'Premium Quality',
-    description: 'High quality materials built to last',
-  },
-  {
-    icon: <FiTruck />,
-    title: 'Fast Delivery',
-    description: 'Quick delivery across the Kingdom',
-  },
-  {
-    icon: <FiHeadphones />,
-    title: '24/7 Support',
-    description: "We're here to help you anytime",
-  },
-];
+import { useTranslation } from "react-i18next";
+import { FiAward, FiTruck, FiHeadphones } from "react-icons/fi";
+import "./Features.css";
 
 const Features = () => {
+  const { t } = useTranslation();
+
+  const features = [
+    {
+      icon: <FiAward />,
+      title: t("featureQualityTitle"),
+      description: t("featureQualityDesc"),
+    },
+    {
+      icon: <FiTruck />,
+      title: t("featureDeliveryTitle"),
+      description: t("featureDeliveryDesc"),
+    },
+    {
+      icon: <FiHeadphones />,
+      title: t("featureSupportTitle"),
+      description: t("featureSupportDesc"),
+    },
+  ];
+
   return (
     <section className="features">
       <div className="features-container">
@@ -27,8 +30,8 @@ const Features = () => {
           <div className="feature-item" key={index}>
             <div className="feature-icon">{feature.icon}</div>
             <div className="feature-text">
-              <h3 className="feature-title">{feature.title}</h3>
-              <p className="feature-description">{feature.description}</p>
+              <span className="feature-title">{feature.title}</span>
+              <span className="feature-description">{feature.description}</span>
             </div>
           </div>
         ))}

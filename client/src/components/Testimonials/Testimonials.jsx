@@ -1,34 +1,40 @@
+import { useTranslation } from "react-i18next";
 import { FiStar } from "react-icons/fi";
 import { FaQuoteRight } from "react-icons/fa";
 import "./Testimonials.css";
 
-const testimonials = [
-  {
-    name: "Ahmed Al-Rashid",
-    rating: 5,
-    text: "The quality of the executive desks we ordered exceeded our expectations. Delivery was fast and the team was professional throughout.",
-    initials: "AR",
-  },
-  {
-    name: "Sarah Al-Mutairi",
-    rating: 4,
-    text: "Beautiful furniture with excellent craftsmanship. My clients are always impressed with the pieces I source from Shuja'at Al-Khail.",
-    initials: "SM",
-  },
-  {
-    name: "Khalid Al-Otaibi",
-    rating: 4,
-    text: "We furnished our entire office and couldn't be happier. Great prices, premium quality, and reliable service. Highly recommended.",
-    initials: "KO",
-  },
-];
-
 const Testimonials = () => {
+  const { t } = useTranslation();
+
+  const testimonials = [
+    {
+      name: t("testimonial1Name"),
+      role: t("testimonial1Role"),
+      text: t("testimonial1Text"),
+      rating: 5,
+      initials: "AR",
+    },
+    {
+      name: t("testimonial2Name"),
+      role: t("testimonial2Role"),
+      text: t("testimonial2Text"),
+      rating: 4,
+      initials: "SM",
+    },
+    {
+      name: t("testimonial3Name"),
+      role: t("testimonial3Role"),
+      text: t("testimonial3Text"),
+      rating: 4,
+      initials: "KO",
+    },
+  ];
+
   return (
     <section className="testimonials">
       <div className="container testimonials-container">
         <div className="section-header">
-          <h2 className="section-title">What Our Clients Say</h2>
+          <h2 className="section-title">{t("ourClients")}</h2>
           <span className="section-divider"></span>
         </div>
 

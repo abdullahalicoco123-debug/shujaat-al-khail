@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FiMapPin, FiPhone, FiMail, FiClock, FiSend } from "react-icons/fi";
 import {
   FaFacebookF,
@@ -8,6 +9,8 @@ import {
 import "./Contact.css";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,47 +39,68 @@ const Contact = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.name.trim())
-      newErrors.name = "Name is required";
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+    if (!formData.name.trim()) {
+      newErrors.name = t("nameRequired");
     }
 
-    if (!formData.message.trim())
-      newErrors.message = "Message is required";
+    if (!formData.email.trim()) {
+      newErrors.email = t("emailRequired");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = t("emailInvalid");
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = t("messageRequired");
+    }
 
     return newErrors;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const validationErrors = validate();
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
     setIsSending(true);
+
     try {
       const res = await fetch("http://localhost:5000/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData),
       });
+
       const data = await res.json();
 
       if (!res.ok) {
-        setErrors({ message: data.message || "Could not send. Try again." });
+        setErrors({
+          message: data.message || t("contactError"),
+        });
       } else {
         setIsSubmitted(true);
-        setFormData({ name: "", email: "", phone: "", message: "" });
-        setTimeout(() => setIsSubmitted(false), 5000);
+
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
       }
     } catch {
-      setErrors({ message: "Could not connect to the server." });
+      setErrors({
+        message: t("serverError"),
+      });
     } finally {
       setIsSending(false);
     }
@@ -86,23 +110,27 @@ const Contact = () => {
     <section className="contact">
       <div className="container contact-container">
         <div className="section-header">
-          <h2 className="section-title">Get In Touch</h2>
+          <h2 className="section-title">
+            {t("getInTouch")}
+          </h2>
+
           <span className="section-divider"></span>
         </div>
 
         <div className="contact-grid">
           {/* Contact Information */}
+
           <div className="contact-info">
             <h3 className="contact-info-title">
-              Contact Information
+              {t("contactTitle")}
             </h3>
 
             <p className="contact-info-text">
-              Have a question or need a quote? Reach out to us and our team
-              will get back to you as soon as possible.
+              {t("contactText")}
             </p>
 
             <div className="contact-info-list">
+
               <div className="contact-info-item">
                 <div className="contact-info-icon">
                   <FiMapPin />
@@ -110,11 +138,11 @@ const Contact = () => {
 
                 <div>
                   <span className="contact-info-label">
-                    Address
+                    {t("contactAddressLabel")}
                   </span>
 
                   <span className="contact-info-value">
-                     Al Faisaliyyah, Riyadh, Saudi Arabia
+                    {t("address")}
                   </span>
                 </div>
               </div>
@@ -126,7 +154,7 @@ const Contact = () => {
 
                 <div>
                   <span className="contact-info-label">
-                    Phone
+                    {t("contactPhoneLabel")}
                   </span>
 
                   <a
@@ -145,7 +173,7 @@ const Contact = () => {
 
                 <div>
                   <span className="contact-info-label">
-                    Email
+                    {t("contactEmailLabel")}
                   </span>
 
                   <a
@@ -164,14 +192,15 @@ const Contact = () => {
 
                 <div>
                   <span className="contact-info-label">
-                    Working Hours
+                    {t("contactHoursLabel")}
                   </span>
 
                   <span className="contact-info-value">
-                    Sun – Thu: 9AM – 6PM
+                    {t("contactHours")}
                   </span>
                 </div>
               </div>
+
             </div>
 
             <div className="contact-socials">
@@ -202,26 +231,34 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
+
           <div className="contact-form-wrap">
+
             {isSubmitted && (
               <div className="contact-success">
-                Thank you! Your message has been received. We'll get back to
-                you soon.
+                {t("contactSuccess")}
               </div>
             )}
+
             {errors.message && (
-              <div className="contact-error contact-form-error" role="alert">
+              <div
+                className="contact-error contact-form-error"
+                role="alert"
+              >
                 {errors.message}
               </div>
             )}
 
-            <form className="contact-form" onSubmit={handleSubmit}>
-              <div className="contact-field">
+            <form
+              className="contact-form"
+              onSubmit={handleSubmit}
+            >
+                            <div className="contact-field">
                 <label
                   htmlFor="name"
                   className="contact-field-label"
                 >
-                  Full Name
+                  {t("contactFullName")}
                 </label>
 
                 <input
@@ -233,7 +270,7 @@ const Contact = () => {
                   className={`contact-input ${
                     errors.name ? "contact-input-error" : ""
                   }`}
-                  placeholder="Enter your name"
+                  placeholder={t("contactNamePlaceholder")}
                 />
 
                 {errors.name && (
@@ -244,12 +281,13 @@ const Contact = () => {
               </div>
 
               <div className="contact-field-row">
+
                 <div className="contact-field">
                   <label
                     htmlFor="email"
                     className="contact-field-label"
                   >
-                    Email
+                    {t("contactEmail")}
                   </label>
 
                   <input
@@ -261,7 +299,7 @@ const Contact = () => {
                     className={`contact-input ${
                       errors.email ? "contact-input-error" : ""
                     }`}
-                    placeholder="Enter your email"
+                    placeholder={t("contactEmailPlaceholder")}
                   />
 
                   {errors.email && (
@@ -276,9 +314,9 @@ const Contact = () => {
                     htmlFor="phone"
                     className="contact-field-label"
                   >
-                    Phone{" "}
+                    {t("contactPhone")}{" "}
                     <span className="contact-optional">
-                      (optional)
+                      {t("contactOptional")}
                     </span>
                   </label>
 
@@ -289,9 +327,10 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className="contact-input"
-                    placeholder="Enter your phone"
+                    placeholder={t("contactPhonePlaceholder")}
                   />
                 </div>
+
               </div>
 
               <div className="contact-field">
@@ -299,7 +338,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="contact-field-label"
                 >
-                  Message
+                  {t("contactMessage")}
                 </label>
 
                 <textarea
@@ -313,7 +352,7 @@ const Contact = () => {
                       ? "contact-input-error"
                       : ""
                   }`}
-                  placeholder="How can we help you?"
+                  placeholder={t("contactMessagePlaceholder")}
                 />
 
                 {errors.message && (
@@ -329,7 +368,10 @@ const Contact = () => {
                 disabled={isSending}
               >
                 <FiSend className="contact-submit-icon" />
-                {isSending ? "Sending..." : "Send Message"}
+
+                {isSending
+                  ? t("contactSending")
+                  : t("contactSend")}
               </button>
             </form>
           </div>
@@ -340,3 +382,4 @@ const Contact = () => {
 };
 
 export default Contact;
+            

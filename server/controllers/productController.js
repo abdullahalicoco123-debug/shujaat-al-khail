@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
 // Get all products
-// Get all products (optionally only featured)
+// Get all products (filter by featured, category slug, and/or search term)
 const getProducts = async (req, res) => {
   try {
     const filter = {};
@@ -17,6 +17,20 @@ const getProducts = async (req, res) => {
         return res.json([]);
       }
       filter.category = category._id;
+    }
+
+    if (req.query.search) {
+      const term = req.query.search.trim();
+      if (term) {
+        const safe = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(safe, "i");
+        filter.$or = [
+          { nameEn: regex },
+          { nameAr: regex },
+          { descriptionEn: regex },
+          { descriptionAr: regex },
+        ];
+      }
     }
 
     const products = await Product.find(filter).populate("category");

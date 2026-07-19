@@ -1,41 +1,35 @@
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FiCheck } from "react-icons/fi";
 import aboutImage from "../../assets/images/hero-home.jpg";
 import "./About.css";
 
-const highlights = [
-  "Premium quality craftsmanship",
-  "Wide range of office & home furniture",
-  "Trusted by businesses across the Kingdom",
-  "Custom solutions for every space",
-];
-
 const About = () => {
+  const { t } = useTranslation();
+
+  const highlights = [
+    t("aboutHighlight1"),
+    t("aboutHighlight2"),
+    t("aboutHighlight3"),
+    t("aboutHighlight4"),
+  ];
+
   return (
     <section className="about">
       <div className="container about-container">
         <div className="about-content-side">
           <div className="about-label">
             <span className="about-label-line"></span>
-            <span className="about-label-text">About Us</span>
+            <span className="about-label-text">{t("about")}</span>
           </div>
 
           <h2 className="about-title">
-            Crafting Comfort &amp; Elegance for
-            <span className="about-title-gold"> Every Space</span>
+            {t("aboutTitle")}
+            <span className="about-title-gold"> {t("aboutTitleGold")}</span>
           </h2>
 
-          <p className="about-text">
-            Shuja'at Al-Khail is a leading provider of premium office and home
-            furniture in Saudi Arabia. We believe great furniture is where
-            comfort meets design — helping businesses and families create spaces
-            that inspire productivity and relaxation.
-          </p>
-
-          <p className="about-text">
-            From executive offices to modern homes, schools and secure storage,
-            our carefully curated collections blend quality materials, timeless
-            style and lasting durability.
-          </p>
+          <p className="about-text">{t("aboutText1")}</p>
+          <p className="about-text">{t("aboutText2")}</p>
 
           <ul className="about-highlights">
             {highlights.map((item, index) => (
@@ -48,9 +42,9 @@ const About = () => {
             ))}
           </ul>
 
-          <a href="#" className="about-btn">
-            Learn More About Us
-          </a>
+          <Link to="/about" className="about-btn">
+            {t("aboutBtn")}
+          </Link>
         </div>
 
         <div className="about-image-side">
@@ -58,12 +52,12 @@ const About = () => {
           <div className="about-stats">
             <div className="about-stat">
               <span className="about-stat-number">500+</span>
-              <span className="about-stat-label">Happy Clients</span>
+              <span className="about-stat-label">{t("aboutStat1Label")}</span>
             </div>
             <div className="about-stat-divider"></div>
             <div className="about-stat">
               <span className="about-stat-number">1000+</span>
-              <span className="about-stat-label">Products</span>
+              <span className="about-stat-label">{t("aboutStat2Label")}</span>
             </div>
           </div>
         </div>

@@ -5,21 +5,21 @@ import { FiArrowRight } from "react-icons/fi";
 import "./Categories.css";
 
 const Categories = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/categories")
       .then((res) => res.json())
-      .then((data) => setCategories(data))
+      .then((data) => setCategories(Array.isArray(data) ? data : []))
       .catch((error) => console.log("Error fetching categories:", error));
   }, []);
 
   return (
-    <section className="categories">
+    <section className="categories" id="categories">
       <div className="container categories-container">
         <div className="section-header">
-          <h2 className="section-title">Shop by Category</h2>
+          <h2 className="section-title">{t("shopByCategory")}</h2>
           <span className="section-divider"></span>
         </div>
 
@@ -45,7 +45,7 @@ const Categories = () => {
                   {i18n.language === "ar" ? category.nameAr : category.nameEn}
                 </h3>
                 <span className="category-link">
-                  View Collection
+                  {t("viewCollection")}
                   <FiArrowRight className="category-link-icon" />
                 </span>
               </div>

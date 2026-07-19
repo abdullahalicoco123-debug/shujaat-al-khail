@@ -14,12 +14,16 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./pages/admin/AdminRoute";
+import SearchPage from "./pages/SearchPage";
+import AdminForgotPassword from "./pages/admin/AdminForgotPassword";
+import AdminResetPassword from "./pages/admin/AdminResetPassword";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
+        <Route path="search" element={<SearchPage />} />
         <Route path="shop" element={<ShopPage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
         <Route path="category/:slug" element={<CategoryPage />} />
@@ -30,6 +34,8 @@ function App() {
         <Route path="contact" element={<ContactPage />} />
         <Route path="privacy" element={<PrivacyPage />} />
         <Route path="terms" element={<TermsPage />} />
+        <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
+      <Route path="/admin/reset-password/:token" element={<AdminResetPassword />} />
       </Route>
 
       <Route path="/admin/login" element={<AdminLogin />} />

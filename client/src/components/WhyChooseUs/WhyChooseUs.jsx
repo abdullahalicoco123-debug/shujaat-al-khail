@@ -1,35 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { FiAward, FiTruck, FiDollarSign, FiHeadphones } from "react-icons/fi";
 import whyImage from "../../assets/images/hero-image.jpg";
 import "./WhyChooseUs.css";
 
-const reasons = [
-  {
-    icon: <FiAward />,
-    title: "Premium Quality",
-    description:
-      "Every piece is crafted from high-grade materials built to last for years.",
-  },
-  {
-    icon: <FiTruck />,
-    title: "Fast Delivery",
-    description:
-      "Quick and reliable delivery across the Kingdom, right to your door.",
-  },
-  {
-    icon: <FiDollarSign />,
-    title: "Competitive Pricing",
-    description:
-      "Factory-direct prices that give you premium furniture for less.",
-  },
-  {
-    icon: <FiHeadphones />,
-    title: "Dedicated Support",
-    description:
-      "Our team is here to help you before, during and after your purchase.",
-  },
-];
-
 const WhyChooseUs = () => {
+  const { t } = useTranslation();
+
+  const reasons = [
+    { icon: <FiAward />, title: t("whyReason1Title"), description: t("whyReason1Desc") },
+    { icon: <FiTruck />, title: t("whyReason2Title"), description: t("whyReason2Desc") },
+    { icon: <FiDollarSign />, title: t("whyReason3Title"), description: t("whyReason3Desc") },
+    { icon: <FiHeadphones />, title: t("whyReason4Title"), description: t("whyReason4Desc") },
+  ];
+
   return (
     <section className="why">
       <div className="container why-container">
@@ -37,26 +20,22 @@ const WhyChooseUs = () => {
           <img src={whyImage} alt="Premium office furniture" className="why-image" />
           <div className="why-image-badge">
             <span className="why-badge-number">10+</span>
-            <span className="why-badge-text">Years of Excellence</span>
+            <span className="why-badge-text">{t("whyBadgeText")}</span>
           </div>
         </div>
 
         <div className="why-content-side">
           <div className="why-label">
             <span className="why-label-line"></span>
-            <span className="why-label-text">Why Choose Us</span>
+            <span className="why-label-text">{t("whyChooseUs")}</span>
           </div>
 
           <h2 className="why-title">
-            Furniture That Combines
-            <span className="why-title-gold"> Style &amp; Function</span>
+            {t("whyTitle")}
+            <span className="why-title-gold"> {t("whyTitleGold")}</span>
           </h2>
 
-          <p className="why-intro">
-            We deliver premium office and home furniture designed for comfort,
-            durability and elegance — trusted by businesses and families across
-            the Kingdom.
-          </p>
+          <p className="why-intro">{t("whyIntro")}</p>
 
           <div className="why-reasons">
             {reasons.map((reason, index) => (
