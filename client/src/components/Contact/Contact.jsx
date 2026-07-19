@@ -17,6 +17,7 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,30 +51,35 @@ const Contact = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     const validationErrors = validate();
-
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    console.log("Contact Form Submitted:", formData);
+    setIsSending(true);
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
 
-    setIsSubmitted(true);
-
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
-
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+      if (!res.ok) {
+        setErrors({ message: data.message || "Could not send. Try again." });
+      } else {
+        setIsSubmitted(true);
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
+    } catch {
+      setErrors({ message: "Could not connect to the server." });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -203,6 +209,11 @@ const Contact = () => {
                 you soon.
               </div>
             )}
+            {errors.message && (
+              <div className="contact-error contact-form-error" role="alert">
+                {errors.message}
+              </div>
+            )}
 
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="contact-field">
@@ -315,9 +326,10 @@ const Contact = () => {
               <button
                 type="submit"
                 className="contact-submit"
+                disabled={isSending}
               >
                 <FiSend className="contact-submit-icon" />
-                Send Message
+                {isSending ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

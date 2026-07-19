@@ -24,6 +24,8 @@ const orderRoutes = require("./routes/orderRoutes");
 app.use("/api/orders", orderRoutes);
 const galleryRoutes = require("./routes/galleryRoutes");
 app.use("/api/gallery", galleryRoutes);
+const contactRoutes = require("./routes/contactRoutes");
+app.use("/api/contact", contactRoutes);
 
 const PORT = process.env.PORT || 5000;
 

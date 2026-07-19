@@ -8,19 +8,10 @@ function ContactPage() {
       <section className="contact-map">
         <iframe
           title="Shuja'at Al-Khail Location"
-          src="https://www.google.com/maps?output=embed&q=Al+Faisaliyyah%2C+Riyadh%2C+Saudi+Arabia&z=15"
+        src="https://www.google.com/maps?q=24.6344528,46.7742259&z=17&output=embed"
           loading="lazy"
           allowFullScreen
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        <a
-          className="contact-map-link"
-          href="https://www.google.com/maps/search/?api=1&query=Al+Faisaliyyah%2C+Riyadh%2C+Saudi+Arabia"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Open location in Google Maps
-        </a>
+        ></iframe>
       </section>
     </>
   );

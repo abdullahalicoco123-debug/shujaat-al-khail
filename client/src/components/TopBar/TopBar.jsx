@@ -33,9 +33,9 @@ function TopBar() {
             <span>+966 56 565 7191</span>
           </a>
 
-          <a href="mailto:info@shujaatfurnituresa.com">
+          <a href="mailto:ali@shujaatfurnituresa.com">
             <FaEnvelope />
-            <span>@shujaatfurnituresa.com</span>
+            <span>ali@shujaatfurnituresa.com</span>
           </a>
 
           <div className="social-icons">

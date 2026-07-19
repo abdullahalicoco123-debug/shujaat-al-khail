@@ -204,6 +204,10 @@ a.contact-info-value:hover {
   margin-top: 6px;
 }
 
+.contact-form-error {
+  margin-bottom: 14px;
+}
+
 .contact-submit {
   display: inline-flex;
   align-items: center;
@@ -226,6 +230,11 @@ a.contact-info-value:hover {
 
 .contact-submit:hover {
   background-color: var(--color-gold);
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 .contact-submit-icon {

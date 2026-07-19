@@ -1,25 +1,23 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FiShoppingCart, FiHeart } from "react-icons/fi";
-import "./FeaturedProducts.css";
 import { useCart } from "../../context/CartContext";
+import "./FeaturedProducts.css";
 
 const FeaturedProducts = () => {
   const { i18n } = useTranslation();
-  const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-   fetch("http://localhost:5000/api/products?featured=true")
+    fetch("http://localhost:5000/api/products?featured=true")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.log("Error fetching products:", error));
   }, []);
 
-  const formatPrice = (value) =>
-    i18n.language === "ar"
-      ? `${value.toLocaleString("ar-SA")} ر.س`
-      : `SAR ${value.toLocaleString("en-US")}`;
+  const formatPrice = (value) => `SAR ${value.toLocaleString("en-US")}`;
 
   return (
     <section className="featured">
@@ -49,15 +47,17 @@ const FeaturedProducts = () => {
                   <FiHeart />
                 </button>
 
-                <img
-                  src={
-                    product.images && product.images.length > 0
-                      ? product.images[0]
-                      : "https://via.placeholder.com/400x400?text=Product"
-                  }
-                  alt={i18n.language === "ar" ? product.nameAr : product.nameEn}
-                  className="product-image"
-                />
+                <Link to={`/product/${product._id}`}>
+                  <img
+                    src={
+                      product.images && product.images.length > 0
+                        ? product.images[0]
+                        : "https://via.placeholder.com/400x400?text=Product"
+                    }
+                    alt={i18n.language === "ar" ? product.nameAr : product.nameEn}
+                    className="product-image"
+                  />
+                </Link>
               </div>
 
               <div className="product-info">
@@ -68,29 +68,33 @@ const FeaturedProducts = () => {
                       : product.category.nameEn
                     : ""}
                 </span>
-                <h3 className="product-name">
-                  {i18n.language === "ar" ? product.nameAr : product.nameEn}
-                </h3>
+                <Link
+                  to={`/product/${product._id}`}
+                  className="product-name-link"
+                >
+                  <h3 className="product-name">
+                    {i18n.language === "ar" ? product.nameAr : product.nameEn}
+                  </h3>
+                </Link>
 
-                {typeof product.price === "number" && (
-                  <div className="product-price">
-                    <span className="product-price-current">
-                      {formatPrice(product.price)}
+                <div className="product-price">
+                  <span className="product-price-current">
+                    {formatPrice(product.price)}
+                  </span>
+                  {product.oldPrice && (
+                    <span className="product-price-old">
+                      {formatPrice(product.oldPrice)}
                     </span>
-                    {typeof product.oldPrice === "number" && (
-                      <span className="product-price-old">
-                        {formatPrice(product.oldPrice)}
-                      </span>
-                    )}
-                  </div>
-                )}
+                  )}
+                </div>
 
-                {typeof product.price === "number" && (
-                  <button className="product-cart-btn" onClick={() => addToCart(product)}>
-                    <FiShoppingCart className="product-cart-icon" />
-                    Add to Cart
-                  </button>
-                )}
+                <button
+                  className="product-cart-btn"
+                  onClick={() => addToCart(product)}
+                >
+                  <FiShoppingCart className="product-cart-icon" />
+                  Add to Cart
+                </button>
               </div>
             </div>
           ))}
