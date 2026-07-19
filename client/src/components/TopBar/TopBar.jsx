@@ -35,7 +35,7 @@ function TopBar() {
 
           <a href="mailto:ali@shujaatfurnituresa.com">
             <FaEnvelope />
-            <span>ali@shujaatfurnituresa.com</span>
+            <span>info@shujaatfurnituresa.com</span>
           </a>
 
           <div className="social-icons">
