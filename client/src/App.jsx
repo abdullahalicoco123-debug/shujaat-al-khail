@@ -17,12 +17,11 @@ import AdminRoute from "./pages/admin/AdminRoute";
 import SearchPage from "./pages/SearchPage";
 import AdminForgotPassword from "./pages/admin/AdminForgotPassword";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
-import Analytics from "./components/Analytics";
 
 function App() {
   return (
     <>
-      <Analytics />
+     
 
       <Routes>
         <Route path="/" element={<Layout />}>
