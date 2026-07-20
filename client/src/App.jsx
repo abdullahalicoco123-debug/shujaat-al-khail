@@ -17,37 +17,49 @@ import AdminRoute from "./pages/admin/AdminRoute";
 import SearchPage from "./pages/SearchPage";
 import AdminForgotPassword from "./pages/admin/AdminForgotPassword";
 import AdminResetPassword from "./pages/admin/AdminResetPassword";
+import Analytics from "./components/Analytics";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="search" element={<SearchPage />} />
-        <Route path="shop" element={<ShopPage />} />
-        <Route path="product/:id" element={<ProductDetailPage />} />
-        <Route path="category/:slug" element={<CategoryPage />} />
-        <Route path="gallery" element={<GalleryPage />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
-        <Route path="about" element={<AboutPage />} />
-        <Route path="contact" element={<ContactPage />} />
-        <Route path="privacy" element={<PrivacyPage />} />
-        <Route path="terms" element={<TermsPage />} />
-        <Route path="/admin/forgot-password" element={<AdminForgotPassword />} />
-      <Route path="/admin/reset-password/:token" element={<AdminResetPassword />} />
-      </Route>
+    <>
+      <Analytics />
 
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route
-        path="/admin/dashboard"
-        element={
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        }
-      />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="search" element={<SearchPage />} />
+          <Route path="shop" element={<ShopPage />} />
+          <Route path="product/:id" element={<ProductDetailPage />} />
+          <Route path="category/:slug" element={<CategoryPage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="privacy" element={<PrivacyPage />} />
+          <Route path="terms" element={<TermsPage />} />
+          <Route
+            path="/admin/forgot-password"
+            element={<AdminForgotPassword />}
+          />
+          <Route
+            path="/admin/reset-password/:token"
+            element={<AdminResetPassword />}
+          />
+        </Route>
+
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 

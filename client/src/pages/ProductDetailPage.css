@@ -258,49 +258,6 @@
   color: var(--color-gold);
 }
 
-/* ============================
-   Contact for Price Button
-============================ */
-
 .pd-contact-btn {
-  flex-grow: 1;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-
-  padding: 14px;
-
-  border-radius: 6px;
-
-  background: #25D366;
-  color: #ffffff;
-
   text-decoration: none;
-
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  text-transform: uppercase;
-
-  transition: all 0.3s ease;
-
-  cursor: pointer;
-}
-
-.pd-contact-btn:hover {
-  background: #1da851;
-  transform: translateY(-2px);
-}
-
-.pd-contact-btn svg {
-  font-size: 22px;
-  color: #ffffff;
-  flex-shrink: 0;
-}
-
-.pd-contact-btn span {
-  display: inline-block;
-  line-height: 1;
 }

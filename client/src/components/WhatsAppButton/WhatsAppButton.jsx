@@ -1,24 +1,73 @@
+import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import "./WhatsAppButton.css";
 
-const phoneNumber = "966565657191";
-const message = "Hello, I would like to know more about your furniture.";
+// Add more numbers here when the client provides them.
+// Format: country code + number, no + and no spaces.
+const contacts = [
+  {
+    label: "Shuja'at Al-Khail",
+    number: "966565657191",
+    message: "Hello! I'm interested in your furniture.",
+  },
+  // {
+  //   label: "Support",
+  //   number: "9665XXXXXXXX",
+  //   message: "Hello!",
+  // },
+];
 
 function WhatsAppButton() {
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const [open, setOpen] = useState(false);
+
+  const buildLink = (contact) =>
+    `https://wa.me/${contact.number}?text=${encodeURIComponent(
+      contact.message
+    )}`;
+
+  // If there is only one contact, open WhatsApp directly.
+  if (contacts.length === 1) {
+    return (
+      <a
+        className="wa-float"
+        href={buildLink(contacts[0])}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp"
+      >
+        <FaWhatsapp />
+      </a>
+    );
+  }
 
   return (
-    <a
-      className="whatsapp-button"
-      href={whatsappUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
-      title="Chat with us on WhatsApp"
-    >
-      <FaWhatsapp aria-hidden="true" />
-      <span>WhatsApp</span>
-    </a>
+    <div className="wa-wrap">
+      {open && (
+        <div className="wa-panel">
+          {contacts.map((contact) => (
+            <a
+              key={contact.number}
+              href={buildLink(contact)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wa-option"
+              onClick={() => setOpen(false)}
+            >
+              <FaWhatsapp />
+              <span>{contact.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
+
+      <button
+        className="wa-float"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-label="WhatsApp contact options"
+      >
+        <FaWhatsapp />
+      </button>
+    </div>
   );
 }
 

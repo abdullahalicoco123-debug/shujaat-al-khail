@@ -2,20 +2,10 @@ const mongoose = require("mongoose");
 
 const gallerySchema = new mongoose.Schema(
   {
-    image: {
-      type: String,
-      required: true,
-    },
-    title: {
-      type: String,
-      default: "",
-    },
+    image: { type: String, required: true },
+    title: { type: String, default: "" },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const Gallery = mongoose.model("Gallery", gallerySchema);
-
-module.exports = Gallery;
+module.exports = mongoose.model("Gallery", gallerySchema);      

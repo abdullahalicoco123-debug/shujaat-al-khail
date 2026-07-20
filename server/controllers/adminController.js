@@ -57,11 +57,6 @@ const forgotPassword = async (req, res) => {
     const { email } = req.body;
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
-      console.log("CLIENT_URL:", process.env.CLIENT_URL);
-
-const resetLink = `${process.env.CLIENT_URL}/admin/reset-password/${rawToken}`;
-
-console.log("Reset Link:", resetLink);
     }
 
     // Always the same reply, so nobody can discover which emails exist
