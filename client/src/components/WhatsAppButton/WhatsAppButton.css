@@ -1,57 +1,94 @@
-.whatsapp-button {
+.wa-wrap {
   position: fixed;
-  right: 24px;
   bottom: 24px;
-  z-index: 1000;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 13px 18px;
-  border-radius: 999px;
-  background: #25d366;
+  right: 24px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.wa-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1500;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25d366;
   color: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.wa-wrap .wa-float {
+  position: static;
+}
+
+.wa-float:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+}
+
+.wa-panel {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.wa-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--color-dark-teal);
   text-decoration: none;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
 }
 
-.whatsapp-button svg {
-  font-size: 23px;
+.wa-option:hover {
+  background-color: #e9f9ef;
 }
 
-.whatsapp-button:hover {
-  background: #1ebe5d;
-  color: #fff;
-  transform: translateY(-3px);
+.wa-option svg {
+  color: #25d366;
+  font-size: 18px;
 }
 
-.whatsapp-button:focus-visible {
-  outline: 3px solid var(--color-gold);
-  outline-offset: 3px;
+[dir="rtl"] .wa-float,
+[dir="rtl"] .wa-wrap {
+  right: auto;
+  left: 24px;
+  align-items: flex-start;
 }
 
-@media (max-width: 480px) {
-  .whatsapp-button {
-    right: 16px;
-    bottom: 16px;
-    width: 54px;
-    height: 54px;
-    justify-content: center;
-    padding: 0;
+@media (max-width: 576px) {
+  .wa-float {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    bottom: 18px;
+    right: 18px;
   }
-
-  .whatsapp-button span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  [dir="rtl"] .wa-float,
+  [dir="rtl"] .wa-wrap {
+    left: 18px;
   }
 }
