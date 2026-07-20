@@ -15,7 +15,7 @@ function ShopPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -23,7 +23,7 @@ function ShopPage() {
       })
       .catch(() => setLoading(false));
 
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch(() => {});

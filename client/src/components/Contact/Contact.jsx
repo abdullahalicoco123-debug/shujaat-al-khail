@@ -69,7 +69,7 @@ const Contact = () => {
     setIsSending(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -213,7 +213,9 @@ const Contact = () => {
               </a>
 
               <a
-                href="#"
+                href="https://www.instagram.com/shujaatalkhail/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="contact-social"
                 aria-label="Instagram"
               >

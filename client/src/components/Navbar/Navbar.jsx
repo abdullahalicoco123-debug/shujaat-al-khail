@@ -27,9 +27,13 @@ function Navbar() {
   const dropdownRef = useRef(null);
 
   const isArabic = i18n.language === "ar";
+  const quoteMessage = isArabic
+    ? "مرحباً! أود الحصول على عرض سعر لطلب كمية."
+    : "Hello! I would like to request a quote for a bulk order.";
+  const quoteLink = `https://wa.me/966565657191?text=${encodeURIComponent(quoteMessage)}`;
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(Array.isArray(data) ? data : []))
       .catch(() => {});
@@ -130,7 +134,14 @@ function Navbar() {
             <span>{cartCount}</span>
           </button>
 
-          <button className="quote-btn">{t("getQuote")}</button>
+          <a
+            href={quoteLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="quote-btn"
+          >
+            {t("getQuote")}
+          </a>
 
           <button
             className="hamburger-btn"
@@ -170,11 +181,19 @@ function Navbar() {
 
       {isMobileMenuOpen && (
         <nav className="mobile-menu">
-          <Link to="/" className="mobile-menu-link active" onClick={closeMobileMenu}>
+          <Link
+            to="/"
+            className="mobile-menu-link active"
+            onClick={closeMobileMenu}
+          >
             {t("home")}
           </Link>
 
-          <Link to="/shop" className="mobile-menu-link" onClick={closeMobileMenu}>
+          <Link
+            to="/shop"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
             {t("shop")}
           </Link>
 
@@ -203,21 +222,39 @@ function Navbar() {
             </div>
           )}
 
-          <Link to="/gallery" className="mobile-menu-link" onClick={closeMobileMenu}>
+          <Link
+            to="/gallery"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
             {t("gallery")}
           </Link>
 
-          <Link to="/about" className="mobile-menu-link" onClick={closeMobileMenu}>
+          <Link
+            to="/about"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
             {t("about")}
           </Link>
 
-          <Link to="/contact" className="mobile-menu-link" onClick={closeMobileMenu}>
+          <Link
+            to="/contact"
+            className="mobile-menu-link"
+            onClick={closeMobileMenu}
+          >
             {t("contact")}
           </Link>
 
-          <button className="mobile-quote-btn" onClick={closeMobileMenu}>
+          <a
+            href={quoteLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-quote-btn"
+            onClick={closeMobileMenu}
+          >
             {t("getQuote")}
-          </button>
+          </a>
         </nav>
       )}
     </header>

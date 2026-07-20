@@ -16,7 +16,7 @@ function CategoryPage() {
   useEffect(() => {
     setLoading(true);
 
-    fetch(`http://localhost:5000/api/products?category=${slug}`)
+    fetch(`/api/products?category=${slug}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -27,7 +27,7 @@ function CategoryPage() {
       })
       .catch(() => setLoading(false));
 
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((cats) => {
         const found = cats.find((c) => c.slug === slug);

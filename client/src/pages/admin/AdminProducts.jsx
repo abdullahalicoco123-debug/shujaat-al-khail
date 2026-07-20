@@ -8,7 +8,7 @@ function AdminProducts() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   const fetchProducts = () => {
-    fetch("http://localhost:5000/api/products")
+    fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -28,7 +28,7 @@ function AdminProducts() {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`/api/products/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -48,7 +48,7 @@ function AdminProducts() {
     const token = localStorage.getItem("adminToken");
     try {
       const res = await fetch(
-        `http://localhost:5000/api/products/${product._id}`,
+        `/api/products/${product._id}`,
         {
           method: "PUT",
           headers: {

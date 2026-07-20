@@ -24,7 +24,7 @@ function AdminProductForm({ product, onClose, onSaved }) {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(data))
       .catch(() => {});
@@ -48,7 +48,7 @@ function AdminProductForm({ product, onClose, onSaved }) {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:5000/api/upload", {
+      const res = await fetch("/api/upload", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -103,8 +103,8 @@ function AdminProductForm({ product, onClose, onSaved }) {
     };
 
     const url = isEdit
-      ? `http://localhost:5000/api/products/${product._id}`
-      : "http://localhost:5000/api/products";
+      ? `/api/products/${product._id}`
+      : "/api/products";
 
     try {
       const res = await fetch(url, {

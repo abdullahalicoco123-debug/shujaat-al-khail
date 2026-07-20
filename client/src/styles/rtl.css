@@ -1,286 +1,80 @@
-/* ===== RTL (Arabic) layout fixes ===== */
+/* ===== RTL (Arabic) fixes =====
+   The browser already flips flex/grid layout when dir="rtl".
+   This file only fixes what it CAN'T handle by itself:
+   direction-specific icons, absolute positions, and LTR-only content. */
 
-[dir="rtl"] body {
-  text-align: right;
-}
-
-/* --- Top bar --- */
-[dir="rtl"] .topbar-container {
-  direction: rtl;
-}
-[dir="rtl"] .topbar-right {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .topbar-right a {
-  direction: ltr;
-}
-
-/* --- Hero --- */
-[dir="rtl"] .hero-content {
-  text-align: right;
-}
-[dir="rtl"] .hero-label {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .hero-actions {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .hero-btn {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .hero-btn-icon {
-  transform: rotate(180deg);
-}
-[dir="rtl"] .hero-indicators {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
-/* --- Features --- */
-[dir="rtl"] .feature-item {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-/* --- Section headers --- */
-[dir="rtl"] .section-header {
-  text-align: center;
-}
-
-/* --- Category cards --- */
-[dir="rtl"] .category-info {
-  text-align: right;
-}
-[dir="rtl"] .category-link {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .category-link-icon {
-  transform: rotate(180deg);
-}
-
-/* --- Product cards --- */
-[dir="rtl"] .product-info {
-  text-align: right;
-}
-[dir="rtl"] .product-price {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .product-cart-btn {
-  flex-direction: row-reverse;
-}
-
-/* --- Product detail --- */
+/* --- Text alignment (only where base CSS forces left) --- */
+[dir="rtl"] .hero-content,
+[dir="rtl"] .why-content-side,
+[dir="rtl"] .about-content-side,
+[dir="rtl"] .contact-info,
+[dir="rtl"] .contact-form-wrap,
+[dir="rtl"] .testimonial-card,
+[dir="rtl"] .footer-col,
+[dir="rtl"] .category-info,
+[dir="rtl"] .product-info,
 [dir="rtl"] .pd-info,
-[dir="rtl"] .pd-breadcrumb {
-  text-align: right;
-}
-[dir="rtl"] .pd-price,
-[dir="rtl"] .pd-actions,
-[dir="rtl"] .pd-chips,
-[dir="rtl"] .pd-thumbs {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-
-/* --- Cart & checkout --- */
-[dir="rtl"] .cart-item,
-[dir="rtl"] .cart-summary-row,
-[dir="rtl"] .cart-summary-total,
-[dir="rtl"] .checkout-summary-item,
-[dir="rtl"] .checkout-summary-total {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .cart-item-subtotal {
-  text-align: left;
-}
+[dir="rtl"] .pd-breadcrumb,
+[dir="rtl"] .cart-summary,
 [dir="rtl"] .checkout-form,
-[dir="rtl"] .checkout-summary,
-[dir="rtl"] .cart-summary {
+[dir="rtl"] .checkout-summary {
   text-align: right;
 }
-[dir="rtl"] .checkout-cod {
-  flex-direction: row-reverse;
-}
 
-/* --- Shop / search --- */
-[dir="rtl"] .shop-filters {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .search-bar {
-  flex-direction: row-reverse;
-  padding: 6px 20px 6px 6px;
-}
-
-/* --- Footer --- */
-[dir="rtl"] .footer-container,
-[dir="rtl"] .footer-bottom-container {
-  direction: rtl;
-}
-[dir="rtl"] .footer-col {
-  text-align: right;
-}
-[dir="rtl"] .footer-link {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
+/* --- Arrows must point the other way --- */
+[dir="rtl"] .hero-btn-icon,
+[dir="rtl"] .category-link-icon,
 [dir="rtl"] .footer-link-icon {
   transform: rotate(180deg);
 }
-[dir="rtl"] .footer-contact-item {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-[dir="rtl"] .footer-contact-item a {
-  direction: ltr;
-}
-[dir="rtl"] .footer-socials {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .footer-bottom-container {
-  flex-direction: row-reverse;
-}
-[dir="rtl"] .footer-bottom-links {
-  flex-direction: row-reverse;
-}
 
-/* --- Admin panel stays left-to-right --- */
-[dir="rtl"] .admin-dashboard,
-[dir="rtl"] .admin-login {
-  direction: ltr;
-  text-align: left;
-}
-
-/* --- Why Choose Us --- */
-[dir="rtl"] .why-content-side {
-  text-align: right;
-}
-[dir="rtl"] .why-label {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .why-reason {
-  flex-direction: row-reverse;
-  text-align: right;
-}
+/* --- Absolutely positioned elements need their side swapped --- */
 [dir="rtl"] .why-image-badge {
   right: auto;
   left: 20px;
-  text-align: center;
 }
 
-/* --- About --- */
-[dir="rtl"] .about-content-side {
-  text-align: right;
-}
-[dir="rtl"] .about-label {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .about-highlight {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-[dir="rtl"] .about-stats {
-  flex-direction: row-reverse;
-}
-
-/* --- Testimonials --- */
-[dir="rtl"] .testimonial-card {
-  text-align: right;
-}
-[dir="rtl"] .testimonial-stars {
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-[dir="rtl"] .testimonial-author {
-  flex-direction: row-reverse;
-}
 [dir="rtl"] .testimonial-quote-icon {
   right: auto;
   left: 24px;
 }
-/* ===================================================
-   CONTACT RTL
-=================================================== */
 
-html[dir="rtl"] .contact {
+[dir="rtl"] .product-badge {
+  left: auto;
+  right: 14px;
+}
+
+[dir="rtl"] .product-wishlist {
+  right: auto;
+  left: 14px;
+}
+
+/* --- Phone numbers, emails and prices stay left-to-right --- */
+[dir="rtl"] .topbar-contact-item,
+[dir="rtl"] .footer-contact-item a,
+[dir="rtl"] .contact-info-item a {
+  direction: ltr;
+}
+
+[dir="rtl"] .footer-contact-item a,
+[dir="rtl"] .contact-info-item a {
+  display: block;
+  text-align: right;
+}
+
+/* --- Form fields --- */
+[dir="rtl"] .contact-input,
+[dir="rtl"] .contact-textarea,
+[dir="rtl"] .checkout-field input,
+[dir="rtl"] .checkout-field textarea,
+[dir="rtl"] .search-bar input {
+  text-align: right;
   direction: rtl;
 }
 
-html[dir="rtl"] .contact-grid {
-  direction: rtl;
-}
-
-html[dir="rtl"] .contact-info {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-info-title,
-html[dir="rtl"] .contact-info-text {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-info-list {
-  direction: rtl;
-}
-
-html[dir="rtl"] .contact-info-item {
-  display: flex !important;
-  flex-direction: row-reverse !important;
-  align-items: flex-start;
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-info-item > div:last-child {
-  flex: 1;
-}
-
-html[dir="rtl"] .contact-info-icon {
-  margin-left: 16px;
-  margin-right: 0;
-}
-
-html[dir="rtl"] .contact-info-label,
-html[dir="rtl"] .contact-info-value {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-socials {
-  justify-content: flex-end;
-}
-
-html[dir="rtl"] .contact-form-wrap,
-html[dir="rtl"] .contact-form {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-field {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-field-row {
-  flex-direction: row-reverse;
-}
-
-html[dir="rtl"] .contact-field-label {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-input,
-html[dir="rtl"] .contact-textarea {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-input::placeholder,
-html[dir="rtl"] .contact-textarea::placeholder {
-  text-align: right;
-}
-
-html[dir="rtl"] .contact-submit {
-  align-self: flex-end;
-  flex-direction: row-reverse;
+/* --- Admin panel always stays left-to-right --- */
+[dir="rtl"] .admin-dashboard,
+[dir="rtl"] .admin-login {
+  direction: ltr;
+  text-align: left;
 }

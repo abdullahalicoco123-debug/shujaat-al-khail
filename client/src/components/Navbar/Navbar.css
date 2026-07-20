@@ -419,3 +419,11 @@
 .dropdown-icon.rotated {
   transform: rotate(180deg);
 }
+
+.quote-btn,
+.mobile-quote-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

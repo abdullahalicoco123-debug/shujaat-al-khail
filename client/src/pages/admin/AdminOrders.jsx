@@ -9,7 +9,7 @@ function AdminOrders() {
 
   const fetchOrders = () => {
     const token = localStorage.getItem("adminToken");
-    fetch("http://localhost:5000/api/orders", {
+    fetch("/api/orders", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -27,7 +27,7 @@ function AdminOrders() {
   const handleStatusChange = async (orderId, status) => {
     const token = localStorage.getItem("adminToken");
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      const res = await fetch(`/api/orders/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,7 @@ function AdminCategories() {
   const [form, setForm] = useState({ nameEn: "", nameAr: "", slug: "", image: "" });
 
   const fetchCategories = () => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
@@ -54,7 +54,7 @@ function AdminCategories() {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:5000/api/upload", {
+      const res = await fetch("/api/upload", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -84,8 +84,8 @@ function AdminCategories() {
     setSaving(true);
     const token = localStorage.getItem("adminToken");
     const url = editing
-      ? `http://localhost:5000/api/categories/${editing._id}`
-      : "http://localhost:5000/api/categories";
+      ? `/api/categories/${editing._id}`
+      : "/api/categories";
 
     try {
       const res = await fetch(url, {
@@ -123,7 +123,7 @@ function AdminCategories() {
     const token = localStorage.getItem("adminToken");
 
     try {
-      const res = await fetch(`http://localhost:5000/api/categories/${cat._id}`, {
+      const res = await fetch(`/api/categories/${cat._id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

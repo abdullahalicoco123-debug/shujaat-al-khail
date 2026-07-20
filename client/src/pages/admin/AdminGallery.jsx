@@ -6,7 +6,7 @@ function AdminGallery() {
   const [uploading, setUploading] = useState(false);
 
   const fetchImages = () => {
-    fetch("http://localhost:5000/api/gallery")
+    fetch("/api/gallery")
       .then((res) => res.json())
       .then((data) => {
         setImages(Array.isArray(data) ? data : []);
@@ -30,7 +30,7 @@ function AdminGallery() {
       // 1. Upload the file to Cloudinary
       const formData = new FormData();
       formData.append("image", file);
-      const upRes = await fetch("http://localhost:5000/api/upload", {
+      const upRes = await fetch("/api/upload", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -43,7 +43,7 @@ function AdminGallery() {
       }
 
       // 2. Save it in the gallery
-      const saveRes = await fetch("http://localhost:5000/api/gallery", {
+      const saveRes = await fetch("/api/gallery", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function AdminGallery() {
 
     const token = localStorage.getItem("adminToken");
     try {
-      const res = await fetch(`http://localhost:5000/api/gallery/${id}`, {
+      const res = await fetch(`/api/gallery/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

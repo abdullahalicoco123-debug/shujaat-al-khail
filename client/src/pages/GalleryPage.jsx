@@ -7,7 +7,7 @@ function GalleryPage() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/gallery")
+    fetch("/api/gallery")
       .then((res) => res.json())
       .then((data) => {
         setImages(Array.isArray(data) ? data : []);

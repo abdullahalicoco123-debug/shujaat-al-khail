@@ -21,7 +21,7 @@ const Footer = () => {
   const isArabic = i18n.language === "ar";
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/categories")
+    fetch("/api/categories")
       .then((res) => res.json())
       .then((data) => setCategories(Array.isArray(data) ? data : []))
       .catch(() => {});
@@ -38,7 +38,7 @@ const Footer = () => {
               <a href="#" aria-label="Facebook" className="footer-social">
                 <FaFacebookF />
               </a>
-              <a href="#" aria-label="Instagram" className="footer-social">
+              <a href="https://www.instagram.com/shujaatalkhail/" aria-label="Instagram" className="footer-social" target="_blank" rel="noopener noreferrer">
                 <FaInstagram />
               </a>
               <a href="#" aria-label="LinkedIn" className="footer-social">

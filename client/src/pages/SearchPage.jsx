@@ -24,7 +24,7 @@ function SearchPage() {
       return;
     }
     setLoading(true);
-    fetch(`http://localhost:5000/api/products?search=${encodeURIComponent(query)}`)
+    fetch(`/api/products?search=${encodeURIComponent(query)}`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(Array.isArray(data) ? data : []);
